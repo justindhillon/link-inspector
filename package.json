@@ -1,0 +1,19 @@
+{
+  "name": "project-scanner",
+  "version": "1.0.0",
+  "description": "A tool that automatically scans projects for spelling mistakes and broken links.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justindhillon/project-scanner.git"
+  },
+  "author": "Justin Dhillon",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/justindhillon/project-scanner/issues"
+  },
+  "homepage": "https://github.com/justindhillon/project-scanner#readme"
+}
