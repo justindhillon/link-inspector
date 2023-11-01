@@ -1,4 +1,7 @@
 #! /usr/bin/env node
+const links = require("./links/links.js");
+const spelling = require("./links/links.js");
+
 const args = process.argv.slice(2); // Gets npx arguments
 const command = args[0]; // Gets <command>
 const path = args[1]; // Gets /path/to/your/file/or/directory
@@ -13,27 +16,27 @@ function help() {
     console.log('"scan help" lists available commands');
 }
 
+// Error: no command or path given
+if (args.length < 1) {
+    console.error('Error: no command given');
+    help();
+    process.exit(1);
+}
+
 // npx scan help
 if (command === "help") {
     help();
     process.exit(0);
 }
 
-// Error: no command or path given
-if (args.length < 1) {
-  console.error('Error: no command given');
-  help();
-  process.exit(1);
-}
-
+// npx scan links
 if (command === "links") {
     console.log("links");
-    process.exit(0); // no errors occurred
 }
 
+// npx scan spelling
 if (command === "spelling") {
-    console.log("spelling");
-    process.exit(0); // no errors occurred
+    spelling.spelling(path);
 }
 
 // Error: invalid command
