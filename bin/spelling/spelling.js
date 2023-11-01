@@ -3,4 +3,4 @@ function spelling() {
     process.exit(0);
 }
 
-module.exports = { spelling };
+module.exports = spelling;
