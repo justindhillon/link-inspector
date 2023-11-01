@@ -5,7 +5,7 @@ const spelling = require("./spelling/spelling.js");
 
 const args = process.argv.slice(2); // Gets npx arguments
 const command = args[0]; // Gets <command>
-const path = args[1]; // Gets /path/to/your/file/or/directory
+const path = args[1]; // Gets <file-path>
 
 // Error: no command or path given
 if (args.length < 1) {
