@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "scan": "bin/scan.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/justindhillon/project-scanner.git"
