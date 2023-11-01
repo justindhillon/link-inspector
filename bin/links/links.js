@@ -1,17 +1,15 @@
-#! /usr/bin/env node
-const args = process.argv.slice(2);
-if (args.length < 1) {
-  console.error('Please enter a file or directory');
-  console.error('   npx getBrokenLinks /path/to/your/file/or/directory');
-  process.exit(1); // an error occurred
+const help = require("../help.js");
+
+// path is /path/to/your/file/or/directory
+function links(path) {
+  // Error: no path given
+  if (path === undefined) {
+    console.error('Error: no path given');
+    help.help();
+    process.exit(1);
+  }
+  console.log(path);
+  process.exit(0);
 }
 
-const total = args.reduce((previous, current) => parseFloat(current) * parseFloat(previous));
-
-if (isNaN(total)) {
-  console.error('One or more arguments are not numbers');
-  process.exit(1); // an error occurred
-}
-
-console.log(total);
-process.exit(0); // no errors occurred
+module.exports = { links };

@@ -1,7 +1,6 @@
 // path is /path/to/your/file/or/directory
-function spelling(path) {
+function spelling() {
     console.log("Not implemented yet");
-    console.log(path);
     process.exit(0);
 }
 
