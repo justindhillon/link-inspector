@@ -1,3 +1,4 @@
+const fs = require("fs");
 const help = require("../help.js");
 
 // path is /path/to/your/file/or/directory
@@ -8,8 +9,15 @@ function links(path) {
     help.help();
     process.exit(1);
   }
-  console.log(path);
-  process.exit(0);
+
+  // Error: file or directory does not exist
+  if (fs.existsSync(path)) {
+    console.error('Error: file or directory does not exist');
+    process.exit(0);
+
+  }
+
+  console.log("Not implemented yet");
 }
 
 module.exports = { links };
