@@ -1,3 +1,4 @@
+const getFilePaths = require("./getFilePaths.js");
 const readFile = require("./readFile.js");
 const getLinks = require("./getLinks.js");
 const writeBrokenLinks = require("./writeBrokenLinks.js");
@@ -13,6 +14,20 @@ async function links(path) {
     process.exit(1);
   }
 
+  let filePaths = [];
+
+  if (fs.statSync(path).isDirectory()) {
+    filePaths = filePaths.concat(getFilePaths(path));
+  } else {
+    filePaths.push(path);
+  }
+
+  filePaths.forEach((filePath) => {
+    console.log(filePath);
+  });
+
+  /*
+
   // gets content of path
   const fileContent = readFile(path);
 
@@ -21,7 +36,7 @@ async function links(path) {
 
   // if any broken links are found, it writes 
   // them to an "output" folder
-  writeBrokenLinks(links, path);
+  writeBrokenLinks(links, path);*/
 }
 
 module.exports = links;
