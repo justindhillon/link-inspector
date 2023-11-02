@@ -1,4 +1,5 @@
 const readFile = require("./readFile.js");
+const getLinks = require("./getLinks.js");
 const help = require("../help.js");
 
 // path is <file/directory path>
@@ -10,8 +11,14 @@ function links(path) {
     process.exit(1);
   }
 
-  // console.log() content of path
-  readFile(path);
+  // gets content of path
+  const fileContent = readFile(path);
+
+  // gets array of links from fileContent
+  const links = getLinks(fileContent);
+
+  console.log(links);
+
   process.exit(0);
 }
 
