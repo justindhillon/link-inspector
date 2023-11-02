@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "scan": "bin/scan.js"
+    "scan-links": "bin/index.js"
   },
   "repository": {
     "type": "git",

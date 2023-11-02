@@ -2,12 +2,13 @@ const readFile = require("./readFile.js");
 const getLinks = require("./getLinks.js");
 const writeBrokenLinks = require("./writeBrokenLinks.js");
 const help = require("../help.js");
+const fs = require('fs');
 
 // path is <file/directory path>
 async function links(path) {
-  // Error: no path given
-  if (path === undefined) {
-    console.error('Error: no path given');
+  // Error: path does not exist
+  if (!fs.existsSync(path)) {
+    console.error('Error:', path, 'does not exist');
     help();
     process.exit(1);
   }
