@@ -13,6 +13,12 @@
     "type": "git",
     "url": "git+https://github.com/justindhillon/link-scanner.git"
   },
+  "keywords": [
+    "link",
+    "hyperlink",
+    "checker",
+    "developer-tools"
+  ],
   "author": "Justin Dhillon",
   "license": "AGPL-3.0-or-later",
   "bugs": {
