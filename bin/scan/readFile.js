@@ -7,8 +7,8 @@ function readFile (filePath) {
         const fileContents = fs.readFileSync(filePath, 'utf8');
         return fileContents
     } catch (error) {
-        console.error('Error reading the file:', error.message);
-        process.exit(1);
+        console.error('Error reading the file', filePath, error.message);
+        return '';
     }
 };
 
