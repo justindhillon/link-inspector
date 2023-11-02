@@ -1,7 +1,7 @@
 {
   "name": "link-scanner",
   "version": "1.0.0",
-  "description": " A npm package that automatically scans files, directories, and websites for broken links. ",
+  "description": "A npx package that automatically scans files and directories broken links.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
