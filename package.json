@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/justindhillon/project-scanner/issues"
   },
-  "homepage": "https://github.com/justindhillon/project-scanner#readme"
+  "homepage": "https://github.com/justindhillon/project-scanner#readme",
+  "dependencies": {
+    "link-check": "^5.2.0"
+  }
 }
