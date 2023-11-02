@@ -14,25 +14,26 @@ if (args.length < 1) {
     process.exit(1);
 }
 
+// It is done this way because we don't know
+// how to use process.exit(0) with async functions
+// Error: invalid command
+if (command !== "help" && command !== "links" && command !== "spelling") {
+    console.error('Error: invalid command');
+    help();
+    process.exit(1);
+}
+
 // npx scan help
 if (command === "help") {
     help();
-    process.exit(0);
 }
 
 // npx scan links
 if (command === "links") {
     links(path);
-    process.exit(0);
 }
 
 // npx scan spelling
 if (command === "spelling") {
     spelling(path);
-    process.exit(0);
 }
-
-// Error: invalid command
-console.error('Error: invalid command');
-help();
-process.exit(1);

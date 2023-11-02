@@ -3,7 +3,7 @@ const getLinks = require("./getLinks.js");
 const help = require("../help.js");
 
 // path is <file/directory path>
-function links(path) {
+async function links(path) {
   // Error: no path given
   if (path === undefined) {
     console.error('Error: no path given');
@@ -17,9 +17,15 @@ function links(path) {
   // gets array of links from fileContent
   const links = getLinks(fileContent);
 
-  console.log(links);
+  const linkCheck = require('link-check');
 
-  process.exit(0);
+linkCheck('http://example.com', function (err, result) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log(`${result.link} is ${result.status}`);
+});
 }
 
 module.exports = links;
