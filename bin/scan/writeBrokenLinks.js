@@ -13,6 +13,8 @@ function writeToFile(data, PATH) {
     if (!fs.existsSync(directoryPath)) {
         fs.mkdirSync(directoryPath, { recursive: true });
     }
+    
+    console.log(PATH);
 
     // Writes to file
     fs.appendFile(PATH, data + "\n", function (err) {
@@ -35,7 +37,7 @@ async function writeBrokenLinks(links, PATH) {
                 process.exit(1);
             }
             if (result.status === "dead") {
-                writeToFile(link, path);
+                writeToFile(link, PATH);
             }
         });
     }
