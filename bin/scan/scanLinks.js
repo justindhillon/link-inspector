@@ -35,6 +35,8 @@ async function links(path) {
       writeBrokenLinks(links, filePath);
     }
   });
+
+  console.log("If nothing is output below, no broken links where found");
 }
 
 module.exports = links;

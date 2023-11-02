@@ -14,7 +14,7 @@ function writeToFile(data, PATH) {
         fs.mkdirSync(directoryPath, { recursive: true });
     }
     
-    console.log(PATH);
+    console.log("Broken Link Found:", PATH);
 
     // Writes to file
     fs.appendFile(PATH, data + "\n", function (err) {
