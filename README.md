@@ -1,13 +1,13 @@
 <div align="center">
-<img height="150px" src="https://github.com/justindhillon/link-scanner/assets/145078271/95108cfc-5979-4fb9-840f-a02ad60e0a67">
-<h1>link-scanner</h1>
+<img height="150px" src="https://github.com/justindhillon/link-inspector/assets/145078271/95108cfc-5979-4fb9-840f-a02ad60e0a67">
+<h1>link-inspector</h1>
 <h3>A npx package that automatically scans files and directories broken links.</h3>
 </div>
 
 ## Installation
 
    ```
-   npm install -g link-scanner
+   npm install -g link-inspector
    ```
 
 ## Usage
@@ -29,8 +29,8 @@ We welcome contributions of any kind including pages, suggestions, bug reports, 
 1. Clone
 
    ```
-   git clone https://github.com/justindhillon/link-scanner.git
-   cd link-scanner
+   git clone https://github.com/justindhillon/link-inspector.git
+   cd link-inspector
    ```
 
 2. Install Dependencies
@@ -52,7 +52,7 @@ We welcome contributions of any kind including pages, suggestions, bug reports, 
     ```
 
 ## License
-link-scanner uses the AGPL-3.0 license.
+link-inspector uses the AGPL-3.0 license.
 
 ## Credits
 - [link-check](https://www.npmjs.com/package/link-check)
