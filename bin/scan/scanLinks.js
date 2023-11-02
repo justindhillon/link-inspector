@@ -23,20 +23,18 @@ async function links(path) {
   }
 
   filePaths.forEach((filePath) => {
-    console.log(filePath);
+    // gets content of path
+    const fileContent = readFile(filePath);
+
+    // gets array of links from fileContent
+    const links = getLinks(fileContent);
+
+    // if any broken links are found, it writes 
+    // them to an "output" folder
+    if (links !== null) {
+      writeBrokenLinks(links, filePath);
+    }
   });
-
-  /*
-
-  // gets content of path
-  const fileContent = readFile(path);
-
-  // gets array of links from fileContent
-  const links = getLinks(fileContent);
-
-  // if any broken links are found, it writes 
-  // them to an "output" folder
-  writeBrokenLinks(links, path);*/
 }
 
 module.exports = links;
