@@ -15,12 +15,12 @@
 Makes a file in an "output/" directory that containes all the broken links found
 
     
-    npx scan-links <file/directory path>
+    npx link-inspector <file/directory path>
     
 
 To list available commands:
 
-    npx scan-links help
+    npx link-inspector help
 
 ## Contributing
 We welcome contributions of any kind including pages, suggestions, bug reports, pull requests etc. We would love to hear from you.
@@ -42,7 +42,7 @@ We welcome contributions of any kind including pages, suggestions, bug reports, 
 3. Run the npx package
    
    ```
-   npx scan-links <file/directory path>
+   npx link-inspector <file/directory path>
    ```
 
 4. Testing
