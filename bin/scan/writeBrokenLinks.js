@@ -31,12 +31,14 @@ function writeToFile(data, PATH) {
 // in an "output" folder
 async function writeBrokenLinks(links, PATH) {
     for (const link of links) {
+        await new Promise(r => setTimeout(r, 2000));
         linkCheck(link, function (err, result) {
             if (err) {
                 console.error('Error: failed to validate', link);
                 process.exit(1);
             }
             if (result.status === "dead") {
+                console.log(link, result.status);
                 writeToFile(link, PATH);
             }
         });
