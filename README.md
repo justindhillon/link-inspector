@@ -1,7 +1,7 @@
 <div align="center">
 <img height="150px" src="https://github.com/justindhillon/link-inspector/assets/145078271/95108cfc-5979-4fb9-840f-a02ad60e0a67">
 <h1>link-inspector</h1>
-<h3>A npx package that automatically scans files and directories broken links.</h3>
+<h3>A npx package that automatically scans files and directories for broken links.</h3>
 </div>
 
 ## Installation
