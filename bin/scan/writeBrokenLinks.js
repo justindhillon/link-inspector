@@ -44,7 +44,6 @@ async function writeBrokenLinks(links, PATH) {
                 process.exit(1);
             }
             if (result.status === "dead") {
-                console.log(link, result.status);
                 writeToFile(link, PATH);
             }
         });
