@@ -2,6 +2,11 @@ const linkCheck = require('link-check');
 const fs = require('fs');
 const path = require('path');
 
+function isLocalhostUrl(url) {
+    const localhostRegex = /^(https?:\/\/)?localhost(:\d+)?(\/|$)/i;
+    return localhostRegex.test(url);
+}
+
 // data is string
 // path is <file/directory path>
 // Writes data to identical path in "output"
@@ -32,6 +37,7 @@ function writeToFile(data, PATH) {
 async function writeBrokenLinks(links, PATH) {
     for (const link of links) {
         await new Promise(r => setTimeout(r, 2000));
+        if (isLocalhostUrl(link)) { continue }
         linkCheck(link, function (err, result) {
             if (err) {
                 console.error('Error: failed to validate', link);
