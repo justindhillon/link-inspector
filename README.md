@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/link-inspector.svg)](https://badge.fury.io/js/link-inspector)
+[![Total Downloads](https://img.shields.io/npm/dt/link-inspector)](https://www.npmjs.com/package/link-inspector)
+
 <div align="center">
 <img height="150px" src="https://github.com/justindhillon/link-inspector/assets/145078271/95108cfc-5979-4fb9-840f-a02ad60e0a67">
 <h1>link-inspector</h1>
