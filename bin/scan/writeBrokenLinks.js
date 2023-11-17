@@ -10,7 +10,9 @@ function isLocalhostUrl(url) {
 // data is string
 // path is <file/directory path>
 // Writes data to identical path in "output"
-function writeToFile(data, PATH) {
+function writeToFile(data, PATH, fluff) {
+    console.log(fluff, PATH);
+    PATH = PATH.replace(fluff, '');
     PATH = "output/" + PATH;
     const directoryPath = path.dirname(PATH);
 
@@ -34,7 +36,7 @@ function writeToFile(data, PATH) {
 // path is <file/directory path>
 // If broken links are found, it writes them
 // in an "output" folder
-async function writeBrokenLinks(links, PATH) {
+async function writeBrokenLinks(links, PATH, fluff) {
     for (const link of links) {
         await new Promise(r => setTimeout(r, 2000));
         if (isLocalhostUrl(link)) { continue }
@@ -44,7 +46,7 @@ async function writeBrokenLinks(links, PATH) {
                 process.exit(1);
             }
             if (result.status === "dead") {
-                writeToFile(link, PATH);
+                writeToFile(link, PATH, fluff);
             }
         });
     }
