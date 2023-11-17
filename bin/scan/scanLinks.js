@@ -21,6 +21,10 @@ async function links(path) {
   } else {
     filePaths.push(path);
   }
+  
+  const removeSlash = path.replace(/\/$/, "");
+  const lastSlashIndex = removeSlash.lastIndexOf('/');
+  const fluff = removeSlash.substring(0, lastSlashIndex + 1);
 
   filePaths.forEach((filePath) => {
     // gets content of path
@@ -32,7 +36,7 @@ async function links(path) {
     // if any broken links are found, it writes 
     // them to an "output" folder
     if (links !== null) {
-      writeBrokenLinks(links, filePath);
+      writeBrokenLinks(links, filePath, fluff);
     }
   });
 
