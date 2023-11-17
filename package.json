@@ -1,6 +1,6 @@
 {
   "name": "link-inspector",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A npx package that automatically scans files and directories broken links.",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,8 @@
   "homepage": "https://github.com/justindhillon/link-inspector#readme",
   "dependencies": {
     "link-check": "^5.2.0"
+  },
+  "publishConfig": {
+    "@justindhillon:registry": "https://npm.pkg.github.com"
   }
 }
