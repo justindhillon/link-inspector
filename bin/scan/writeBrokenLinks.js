@@ -11,7 +11,6 @@ function isLocalhostUrl(url) {
 // path is <file/directory path>
 // Writes data to identical path in "output"
 function writeToFile(data, PATH, fluff) {
-    console.log(fluff, PATH);
     PATH = PATH.replace(fluff, '');
     PATH = "output/" + PATH;
     const directoryPath = path.dirname(PATH);
@@ -38,18 +37,29 @@ function writeToFile(data, PATH, fluff) {
 // in an "output" folder
 async function writeBrokenLinks(links, PATH, fluff) {
     for (const link of links) {
-        await new Promise(r => setTimeout(r, 2000));
         if (isLocalhostUrl(link)) { continue }
-        linkCheck(link, function (err, result) {
-            if (err) {
-                console.error('Error: failed to validate', link);
-                process.exit(1);
-            }
+
+        try {
+            const result = await new Promise((resolve, reject) => {
+                linkCheck(link, function (err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                });
+            });
+
             if (result.status === "dead") {
                 writeToFile(link, PATH, fluff);
             }
-        });
+        } catch (err) {
+            console.error('Error: failed to validate', link, err);
+            // Handle the error as needed, maybe continue to the next link instead of exiting
+        }
     }
+
+    return;
 };
 
 module.exports = writeBrokenLinks;
