@@ -6,7 +6,7 @@ const help = require("../help.js");
 const fs = require('fs');
 
 // path is <file/directory path>
-async function links(path) {
+function links(path) {
   // Error: path does not exist
   if (!fs.existsSync(path)) {
     console.error('Error:', path, 'does not exist');
@@ -26,7 +26,7 @@ async function links(path) {
   const lastSlashIndex = removeSlash.lastIndexOf('/');
   const fluff = removeSlash.substring(0, lastSlashIndex + 1);
 
-  filePaths.forEach((filePath) => {
+  filePaths.forEach(async (filePath) => {
     // gets content of path
     const fileContent = readFile(filePath);
 
@@ -36,7 +36,7 @@ async function links(path) {
     // if any broken links are found, it writes 
     // them to an "output" folder
     if (links !== null) {
-      writeBrokenLinks(links, filePath, fluff);
+      await writeBrokenLinks(links, filePath, fluff);
     }
   });
 
