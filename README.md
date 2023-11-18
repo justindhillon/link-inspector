@@ -26,7 +26,7 @@ To list available commands:
     npx link-inspector help
 
 ## Contributing
-We welcome contributions of any kind including pages, suggestions, bug reports, pull requests etc. We would love to hear from you.
+We welcome contributions of any kind including, suggestions, bug reports, pull requests etc. We would love to hear from you. If you want to contribute yourself, see [CONTRIBUTING.md](https://github.com/justindhillon/link-inspector/blob/master/LICENSE.md).
 
 ## Development
 1. Clone
