@@ -38,15 +38,25 @@ function writeToFile(data, PATH, fluff) {
 async function writeBrokenLinks(links, PATH, fluff) {
     for (const link of links) {
         if (isLocalhostUrl(link)) { continue }
-        linkCheck(link, function (err, result) {
-            if (err) {
-                console.error('Error: failed to validate', link);
-                process.exit(1);
-            }
+
+        try {
+            const result = await new Promise((resolve, reject) => {
+                linkCheck(link, function (err, result) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                });
+            });
+
             if (result.status === "dead") {
                 writeToFile(link, PATH, fluff);
             }
-        });
+        } catch (err) {
+            console.error('Error: failed to validate', link, err);
+            // Handle the error as needed, maybe continue to the next link instead of exiting
+        }
     }
 
     return;
