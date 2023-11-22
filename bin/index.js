@@ -17,4 +17,8 @@ if (path === "help") {
     process.exit(0);
 }
 
-scanLinks(path);
+scanLinks(path).then(() => {
+    process.exit(0);
+}).catch(() => {
+    process.exit(1);
+});
