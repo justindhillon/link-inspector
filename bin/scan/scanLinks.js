@@ -6,7 +6,7 @@ const help = require("../help.js");
 const fs = require('fs');
 
 // path is <file/directory path>
-function links(path) {
+async function scanLinks(path) {
   // Error: path does not exist
   if (!fs.existsSync(path)) {
     console.error('Error:', path, 'does not exist');
@@ -26,21 +26,31 @@ function links(path) {
   const lastSlashIndex = removeSlash.lastIndexOf('/');
   const fluff = removeSlash.substring(0, lastSlashIndex + 1);
 
-  filePaths.forEach(async (filePath) => {
-    // gets content of path
-    const fileContent = readFile(filePath);
+  console.log("If nothing is output below, no broken links where found");
 
-    // gets array of links from fileContent
-    const links = getLinks(fileContent);
+  let promises = filePaths.map(filePath => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const fileContent = readFile(filePath);
+        const links = getLinks(fileContent);
 
-    // if any broken links are found, it writes 
-    // them to an "output" folder
-    if (links !== null) {
-      await writeBrokenLinks(links, filePath, fluff);
-    }
+        if (links !== null) {
+          await writeBrokenLinks(links, filePath, fluff);
+        }
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   });
 
-  console.log("If nothing is output below, no broken links where found");
+  await Promise.all(promises)
+    .then(() => {
+      console.log("Finished!");
+    })
+    .catch(error => {
+      console.error("An error occurred:", error);
+    });
 }
 
-module.exports = links;
+module.exports = scanLinks;
