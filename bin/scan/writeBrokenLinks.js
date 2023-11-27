@@ -23,7 +23,7 @@ function writeToFile(data, PATH, fluff) {
     console.log("Broken Link Found:", PATH);
 
     // Writes to file
-    fs.appendFile(PATH, data + "\n", function (err) {
+    fs.appendFileSync(PATH, data + "\n", function (err) {
         if (err) {
             console.error('Error: failed to write to', path, err);
             process.exit(1);
