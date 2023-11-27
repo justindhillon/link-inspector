@@ -48,10 +48,10 @@ We welcome contributions of any kind including, suggestions, bug reports, pull r
    npx link-inspector <file/directory path>
    ```
 
-4. Testing
+4. Testing the npx package
    
     ```
-    npm test
+    npm run test
     ```
 
 ## License
