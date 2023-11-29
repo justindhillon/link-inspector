@@ -11,7 +11,6 @@ async function scanLinks(path) {
   if (!fs.existsSync(path)) {
     console.error('Error:', path, 'does not exist');
     help();
-    process.exit(1);
   }
 
   let filePaths = [];

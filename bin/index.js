@@ -9,12 +9,10 @@ const path = args[0]; // Gets <file/directory-path>
 if (args.length < 1) {
     console.error('Error: no path given');
     help();
-    process.exit(1);
 }
 
 if (path === "help") {
     help();
-    process.exit(0);
 }
 
 scanLinks(path).then(() => {
