@@ -16,7 +16,7 @@ async function scanLinks(path) {
   let filePaths = [];
 
   if (fs.statSync(path).isDirectory()) {
-    filePaths = filePaths.concat(getFilePaths(path));
+    filePaths = getFilePaths(path);
   } else {
     filePaths.push(path);
   }
