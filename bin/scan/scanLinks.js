@@ -26,11 +26,12 @@ async function scanLinks(path, j=1) {
 
   console.log("If nothing is output below, no broken links where found");
 
-  await processPromises(j, filePaths, fluff).then(allResults => {
-    console.log("Finished!");
-  }).catch(error => {
-    console.error(error);
-  });
+  await processPromises(j, filePaths, fluff)
+    .then(() => {
+      console.log("Finished!");
+    }).catch(error => {
+      console.error(error);
+    });
 }
 
 module.exports = scanLinks;
