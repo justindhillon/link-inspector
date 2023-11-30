@@ -1,12 +1,11 @@
-const getFilePaths = require("./getFilePaths.js");
-const readFile = require("./readFile.js");
-const getLinks = require("./getLinks.js");
-const writeBrokenLinks = require("./writeBrokenLinks.js");
-const help = require("../help.js");
 const fs = require('fs');
+const help = require("../help.js");
+const getFilePaths = require("./getFilePaths.js");
+const processPromises = require("./processPromises.js");
 
 // path is <file/directory path>
-async function scanLinks(path) {
+// j is concurrent threads
+async function scanLinks(path, j=1) {
   // Error: path does not exist
   if (!fs.existsSync(path)) {
     console.error('Error:', path, 'does not exist');
@@ -27,28 +26,11 @@ async function scanLinks(path) {
 
   console.log("If nothing is output below, no broken links where found");
 
-  let promises = filePaths.map(filePath => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const fileContent = readFile(filePath);
-        const links = getLinks(fileContent);
-
-        if (links !== null) {
-          await writeBrokenLinks(links, filePath, fluff);
-        }
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    });
-  });
-
-  await Promise.all(promises)
+  await processPromises(j, filePaths, fluff)
     .then(() => {
       console.log("Finished!");
-    })
-    .catch(error => {
-      console.error("An error occurred:", error);
+    }).catch(error => {
+      console.error(error);
     });
 }
 
