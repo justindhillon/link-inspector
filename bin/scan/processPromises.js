@@ -3,7 +3,6 @@ const getLinks = require("./getLinks.js");
 const writeBrokenLinks = require("./writeBrokenLinks.js");
 
 function createPromise(filePath, fluff) {
-    console.log(filePath);
     return new Promise(async (resolve, reject) => {
         try {
           const fileContent = readFile(filePath);
@@ -34,7 +33,8 @@ function processPromises(maxConcurrent, filePaths, fluff) {
             }
 
             runningPromises++;
-            createPromise(filePaths[currentIndex - 1], fluff).then(() => {
+            currentIndex++;
+            createPromise(filePaths[currentIndex - 2], fluff).then(() => {
                 runningPromises--;
                 startNextPromise();
             }).catch(reject);
@@ -42,8 +42,6 @@ function processPromises(maxConcurrent, filePaths, fluff) {
             if (runningPromises < maxConcurrent) {
                 startNextPromise();
             }
-
-            currentIndex++;
         };
 
         startNextPromise();

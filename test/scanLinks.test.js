@@ -17,9 +17,8 @@ describe('scanLinks.js', () => {
             }
           });
 
-        await scanLinks("test/test_suite").then(async () => {
+        await scanLinks("test/test_suite", 10).then(async () => {
             const res = dircompare.compareSync("test/expected_output", "output/test_suite", options);
-            console.log(res.same);
             expect(res.same).toEqual(true);
         }).catch(() => {
             process.exit(1);

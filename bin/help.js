@@ -5,6 +5,9 @@ function help() {
     console.log('   link-inspector  Makes a file in an "output/" directory that');
     console.log('                   containes all the broken links found');
     console.log();
+    console.log('   Option     Meaning');
+    console.log('   -j         Sets the number of parallel threads');
+    console.log();
     console.log('"npx scan help" lists available commands');
     process.exit(1);
 }
