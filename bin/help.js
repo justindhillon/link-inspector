@@ -8,7 +8,7 @@ function help() {
     console.log('   Option     Meaning');
     console.log('   -j         Sets the number of parallel threads');
     console.log();
-    console.log('"npx scan help" lists available commands');
+    console.log('"npx link-inspector help" lists available commands');
     process.exit(1);
 }
 
