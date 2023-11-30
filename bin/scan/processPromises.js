@@ -33,11 +33,8 @@ function processPromises(maxConcurrent, filePaths, fluff) {
                 return;
             }
 
-            const promiseIndex = currentIndex;
-            currentIndex++;
-
             runningPromises++;
-            createPromise(filePaths[promiseIndex - 1], fluff).then(() => {
+            createPromise(filePaths[currentIndex - 1], fluff).then(() => {
                 runningPromises--;
                 startNextPromise();
             }).catch(reject);
@@ -45,6 +42,8 @@ function processPromises(maxConcurrent, filePaths, fluff) {
             if (runningPromises < maxConcurrent) {
                 startNextPromise();
             }
+
+            currentIndex++;
         };
 
         startNextPromise();
