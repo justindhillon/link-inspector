@@ -18,7 +18,8 @@
     "link",
     "hyperlink",
     "checker",
-    "developer-tools"
+    "developer-tools",
+    "cli"
   ],
   "author": "Justin Dhillon",
   "license": "AGPL-3.0-or-later",
