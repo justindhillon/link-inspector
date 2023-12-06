@@ -30,8 +30,8 @@
     "link-check": "^5.2.0"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/justindhillon",
-    "name": "@justindhillon/link-inspector"
+    "@justindhillon:registry": "https://npm.pkg.github.com/justindhillon",
+    "@justindhillon:name": "@justindhillon/link-inspector"
   },
   "devDependencies": {
     "dir-compare": "^4.2.0",
