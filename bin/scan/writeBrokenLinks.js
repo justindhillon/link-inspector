@@ -49,9 +49,7 @@ async function writeBrokenLinks(links, PATH, fluff) {
                 });
             });
             if (result.status === "dead") writeToFile(link, PATH, fluff);
-        } catch (err) {
-            console.error('Error: failed to validate', link, err);
-        }
+        } catch {} // This is in a try catch to skip over unsupported urls
     }
     return;
 };
