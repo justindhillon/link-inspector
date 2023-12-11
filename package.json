@@ -1,11 +1,13 @@
 {
   "name": "link-inspector",
   "version": "1.2.4",
-  "developmentVersion": "1.2.4",
   "description": "A npx package that automatically scans files and directories broken links.",
   "bin": {
     "link-inspector": "dist/index.js"
   },
+  "files": [
+    "!**/*"
+  ],
   "scripts": {
     "build": "./node_modules/.bin/esbuild ./bin/index.js --format=esm --bundle --outfile=./dist/index.js --platform=node --target=node16.3 --minify",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
@@ -34,7 +36,6 @@
   "devDependencies": {
     "dir-compare": "^4.2.0",
     "esbuild": "^0.19.9",
-    "jest": "^29.7.0",
-    "semver": "^7.5.4"
+    "jest": "^29.7.0"
   }
 }
