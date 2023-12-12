@@ -9,7 +9,7 @@
     "!**/*"
   ],
   "scripts": {
-    "build": "./node_modules/.bin/esbuild ./bin/index.js --format=esm --bundle --outfile=./dist/index.js --platform=node --target=node16.3 --minify",
+    "build": "./node_modules/.bin/esbuild ./lib/index.js --format=esm --bundle --outfile=./dist/index.js --platform=node --target=node16.3 --minify",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },

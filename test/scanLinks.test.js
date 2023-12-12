@@ -1,4 +1,4 @@
-const scanLinks = require("../bin/scan/scanLinks");
+const scanLinks = require("../lib/scan/scanLinks");
 const fs = require('fs');
 
 // Documentation on dircompare:
