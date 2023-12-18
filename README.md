@@ -56,6 +56,3 @@ We welcome contributions of any kind including, suggestions, bug reports, pull r
 
 ## License
 link-inspector uses the AGPL-3.0 license.
-
-## Credits
-- [link-check](https://www.npmjs.com/package/link-check)
