@@ -1,6 +1,6 @@
 {
   "name": "link-inspector",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "A npx package that automatically scans files and directories broken links.",
   "bin": {
     "link-inspector": "dist/index.js"
