@@ -5,8 +5,11 @@
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
+    "bin": {
+        "link-inspector": "dist/bin.js"
+    },
     "scripts": {
-        "build": "tsup index.ts --format cjs,esm --dts",
+        "build": "tsup bin.ts --minify",
         "lint": "tsc"
     },
     "devDependencies": {
