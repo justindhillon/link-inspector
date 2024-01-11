@@ -1,10 +1,10 @@
 import { checkLink } from "./checkLink";
 import fs from 'fs';
 
-export function linkInspector(arg: string) {
+export async function linkInspector(arg: string) {
     try { // If arg is a link
         new URL(arg);
-        checkLink(arg);
+        await checkLink(arg);
         return;
     } catch {}
 
@@ -14,7 +14,7 @@ export function linkInspector(arg: string) {
         if (stats.isDirectory()) {
             const files: string[] = fs.readdirSync(arg);
             for (const file of files) {
-                linkInspector(arg + "/" + file);
+                await linkInspector(arg + "/" + file);
             }
             return;
         }
@@ -24,7 +24,7 @@ export function linkInspector(arg: string) {
         const links: string[] = content.match(urlRegex) || [];
 
         for (const link of links) {
-            linkInspector(link);
+            await linkInspector(link);
         }
     } catch (err) {
         console.error(arg);
