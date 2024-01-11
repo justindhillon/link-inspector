@@ -1,4 +1,4 @@
-export async function checkLink(link: string) {
+export async function checkLink(link: string): Promise<boolean> {
     const params = {
         headers: {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", 
@@ -19,26 +19,28 @@ export async function checkLink(link: string) {
 
         if (response.ok) {
             console.log(link, "is valid");
-            return;
+            return false;
         }
 
         if (response.status === 429) {
             console.log(link, "is valid");
-            return;
+            return false;
         }
 
         console.log(link, "is invalid");
+        return true;
     } catch (error: any) {
         if (error.cause.code === "EAI_AGAIN") {
             console.error("Error: No Internet Connection");
-            return;
+            return false;
         }
 
         if (error.cause.code === "ENOTFOUND") {
             console.log(link, "is invalid");
-            return;
+            return true;
         } 
 
         console.log(error);
+        return false;
     }
 }

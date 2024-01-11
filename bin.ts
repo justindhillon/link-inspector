@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { linkInspector } from ".";
+import { linkInspector } from "./index";
 
 const args = process.argv.slice(2);
 
@@ -9,5 +9,7 @@ if (args.length === 0) {
 }
 
 for (const arg of args) {
-    linkInspector(arg);
+    linkInspector(arg).then((brokenLinks) => {
+        console.log(brokenLinks);
+    });
 }
