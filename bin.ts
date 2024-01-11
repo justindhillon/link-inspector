@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { linkInspector } from "./linkInspector";
+import { linkInspector } from ".";
 
 const args = process.argv.slice(2);
 

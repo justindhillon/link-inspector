@@ -9,7 +9,7 @@
         "link-inspector": "dist/bin.js"
     },
     "scripts": {
-        "build": "tsup bin.ts --minify",
+        "build": "tsup index.ts --format cjs,esm --dts --minify && tsup bin.ts --minify",
         "lint": "tsc"
     },
     "devDependencies": {
