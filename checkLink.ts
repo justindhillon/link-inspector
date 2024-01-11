@@ -1,4 +1,4 @@
-export function checkLink(link: string) {
+export async function checkLink(link: string) {
     const params = {
         headers: {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", 
@@ -14,25 +14,31 @@ export function checkLink(link: string) {
         }
     };
 
-    const fatch_params = {
-        method: "HEAD"
-    }
-
     try {
-        fetch(link).then(response => {
-            if (!response.ok) {
-                console.log(link, "is invalid");
-            } else {
-                console.log(link, "is valid");
-            }
-        });
+        const response = await fetch(link, params);
+
+        if (response.ok) {
+            console.log(link, "is valid");
+            return;
+        }
+
+        if (response.status === 429) {
+            console.log(link, "is valid");
+            return;
+        }
+
+        console.log(link, "is invalid");
     } catch (error: any) {
         if (error.cause.code === "EAI_AGAIN") {
             console.error("Error: No Internet Connection");
-        } else if (error.cause.code === "ENOTFOUND") {
-            console.log(link, "is invalid");
-        } else {
-            console.log(error);
+            return;
         }
+
+        if (error.cause.code === "ENOTFOUND") {
+            console.log(link, "is invalid");
+            return;
+        } 
+
+        console.log(error);
     }
 }
