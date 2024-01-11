@@ -1,4 +1,4 @@
-export async function checkLink(link: string) {
+export function checkLink(link: string) {
     const params = {
         headers: {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", 
@@ -19,8 +19,13 @@ export async function checkLink(link: string) {
     }
 
     try {
-        await fetch(link);
-        console.log(link, "is valid");
+        fetch(link).then(response => {
+            if (!response.ok) {
+                console.log(link, "is invalid");
+            } else {
+                console.log(link, "is valid");
+            }
+        });
     } catch (error: any) {
         if (error.cause.code === "EAI_AGAIN") {
             console.error("Error: No Internet Connection");
