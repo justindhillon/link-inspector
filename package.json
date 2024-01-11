@@ -1,3 +1,7 @@
 {
-    "name": "link-inspector"
+    "name": "link-inspector",
+    "license": "AGPL-3.0-or-later",
+    "devDependencies": {
+        "typescript": "^5.3.3"
+    }
 }
