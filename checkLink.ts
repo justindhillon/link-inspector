@@ -1,4 +1,7 @@
-export async function checkLink(link: string): Promise<boolean> {
+const axios = require("axios");
+
+// Return true if link is broken
+async function checkLink(link: string) { 
     const params = {
         headers: {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", 
@@ -15,32 +18,18 @@ export async function checkLink(link: string): Promise<boolean> {
     };
 
     try {
-        const response = await fetch(link, params);
+        await axios.head(link, params);
+    } catch (err: any) {
+        if (err.response.status !== 405) return true;
 
-        if (response.ok) {
-            console.log(link, "is valid");
-            return false;
-        }
-
-        if (response.status === 429) {
-            console.log(link, "is valid");
-            return false;
-        }
-
-        console.log(link, "is invalid");
-        return true;
-    } catch (error: any) {
-        if (error.cause.code === "EAI_AGAIN") {
-            console.error("Error: No Internet Connection");
-            return false;
-        }
-
-        if (error.cause.code === "ENOTFOUND") {
-            console.log(link, "is invalid");
+        try {
+            await axios.get(link, params);
+        } catch (err) {
             return true;
-        } 
-
-        console.log(error);
-        return false;
+        }
     }
+
+    return false;
 }
+
+module.exports = checkLink;
