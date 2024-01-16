@@ -6,7 +6,7 @@ let CURRENTPROCESS = 0;
 let RUNNINGPROCESSES = 0;
 const MAXPROCESSES = 10;
 
-async function runProcess() {
+async function runProcess(callback: any) {
     if (MAXPROCESSES <= RUNNINGPROCESSES || PROCESSES.length === CURRENTPROCESS) return;
 
     RUNNINGPROCESSES++;
@@ -15,18 +15,18 @@ async function runProcess() {
     CURRENTPROCESS++;
     
     if (await checkLink(link)) {
-        console.log(link);
+        callback(link);
     }
 
     RUNNINGPROCESSES--;
-    runProcess();
+    runProcess(callback);
 }
 
-export async function linkInspector(arg: string) {
+export async function linkInspector(arg: string, callback: any) {
     try { // If arg is a link
         new URL(arg);
         PROCESSES.push(arg);
-        runProcess();
+        runProcess(callback);
         return;
     } catch (err: any) {
         if (err.message == "Cannot read properties of undefined (reading 'status')") return;
@@ -39,7 +39,7 @@ export async function linkInspector(arg: string) {
         if (stats.isDirectory()) {
             const files: string[] = fs.readdirSync(arg);
             for (const file of files) {
-                linkInspector(arg + "/" + file);
+                linkInspector(arg + "/" + file, callback);
             }
             return;
         }
@@ -50,7 +50,7 @@ export async function linkInspector(arg: string) {
         const links: string[] = content.match(urlRegex) || [];
 
         for (const link of links) {
-            linkInspector(link);
+            linkInspector(link, callback);
         }
     } catch {
         console.error("Error: Not a valid link or path")
