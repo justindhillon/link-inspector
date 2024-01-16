@@ -24,9 +24,11 @@ async function runProcess(callback: any, path: any) {
     delete PROCESSES[CURRENTPROCESS];
     CURRENTPROCESS++;
     
-    if (await checkLink(link)) {
-        callback(link, path);
-    }
+    try {
+        if (await checkLink(link)) {
+            callback(link, path);
+        }
+    } catch {} // Skip invalid urls
 
     RUNNINGPROCESSES--;
     runProcess(callback, path);
@@ -38,9 +40,7 @@ export async function linkInspector(arg: string, callback: any, path='') {
         PROCESSES.push(arg);
         runProcess(callback, path);
         return;
-    } catch (err: any) {
-        if (err.message == "Cannot read properties of undefined (reading 'status')") return;
-    }
+    } catch {}
 
     try { // If arg is a path
         const stats = fs.statSync(arg);
