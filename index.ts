@@ -1,6 +1,16 @@
 import { checkLink } from "./checkLink";
 import fs from 'fs';
 
+function isBinaryFile(filePath: string) {
+    const content = fs.readFileSync(filePath);
+    for (let i = 0; i < content.length; i++) {
+      // Check for binary characters in the content
+      if (content[i]! <= 8 || (content[i]! >= 14 && content[i]! <= 31)) {
+        return true; // Binary file detected
+      }
+    }
+}
+
 let PROCESSES: string[] = [];
 let CURRENTPROCESS = 0;
 let RUNNINGPROCESSES = 0;
@@ -45,7 +55,15 @@ export async function linkInspector(arg: string, callback: any, path='') {
         }
 
         // Handle file
-        const content: string = fs.readFileSync(arg, 'utf8');
+        const content: any = fs.readFileSync(arg, 'utf8');
+
+        // Skip binary files
+        if (!/^[\x00-\x7F]*$/.test(content)) {
+            console.log('skip');
+            return;
+        }
+        
+        // Get all the links
         const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         const links: string[] = content.match(urlRegex) || [];
 
