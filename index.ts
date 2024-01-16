@@ -39,7 +39,7 @@ export async function linkInspector(arg: string) {
         if (stats.isDirectory()) {
             const files: string[] = fs.readdirSync(arg);
             for (const file of files) {
-                await linkInspector(arg + "/" + file);
+                linkInspector(arg + "/" + file);
             }
             return;
         }
@@ -50,7 +50,7 @@ export async function linkInspector(arg: string) {
         const links: string[] = content.match(urlRegex) || [];
 
         for (const link of links) {
-            await linkInspector(link);
+            linkInspector(link);
         }
     } catch {
         console.error("Error: Not a valid link or path")
