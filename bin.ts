@@ -9,7 +9,5 @@ if (args.length === 0) {
 }
 
 for (const arg of args) {
-    linkInspector(arg).then((brokenLinks) => {
-        console.log(brokenLinks);
-    });
+    linkInspector(arg);
 }
