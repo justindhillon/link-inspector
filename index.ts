@@ -4,9 +4,13 @@ import fs from 'fs';
 export async function linkInspector(arg: string) {
     try { // If arg is a link
         new URL(arg);
-        await checkLink(arg);
+        if (await checkLink(arg)) {
+            console.log(arg);
+        };
         return;
-    } catch {}
+    } catch (err: any) {
+        if (err.message == "Cannot read properties of undefined (reading 'status')") return;
+    }
 
     try { // If arg is a path
         const stats = fs.statSync(arg);
@@ -28,7 +32,7 @@ export async function linkInspector(arg: string) {
         for (const link of links) {
             await linkInspector(link);
         }
-    } catch (err) {
+    } catch {
         console.error("Error: Not a valid link or path")
     }
 }
