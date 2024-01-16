@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 // Return true if link is broken
-async function checkLink(link: string) { 
+export async function checkLink(link: string): Promise<boolean> {
     const params = {
         headers: {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", 
