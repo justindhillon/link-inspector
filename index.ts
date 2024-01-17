@@ -42,7 +42,7 @@ export async function linkInspector(arg: string, callback: any, path='') {
         if (stats.isDirectory()) {
             const files: string[] = fs.readdirSync(arg);
             for (const file of files) {
-                linkInspector(arg + "/" + file, callback);
+                linkInspector(arg + "/" + file, callback, path);
             }
             return;
         }
@@ -58,7 +58,9 @@ export async function linkInspector(arg: string, callback: any, path='') {
         const links: string[] = content.match(urlRegex) || [];
 
         for (const link of links) {
-            linkInspector(link, callback, arg);
+            const directoryIndex = arg.indexOf(path);
+            const pathAfterDirectory = arg.substring(directoryIndex);
+            linkInspector(link, callback, pathAfterDirectory);
         }
     } catch {
         console.error("Error: Not a valid link or path")

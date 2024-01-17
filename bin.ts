@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import { linkInspector } from "./index";
-import {dirname} from 'path';
+import {dirname, basename} from 'path';
 import fs from 'fs';
 
 const args = process.argv.slice(2);
@@ -23,5 +23,12 @@ async function writeLink(link: string, path: any) {
 }
 
 for (const arg of args) {
-    linkInspector(arg, writeLink, );
+    let path = '';
+
+    try {new URL(arg)}
+    catch {
+        path = basename(arg);
+    }
+
+    linkInspector(arg, writeLink, path);
 }
