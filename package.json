@@ -1,20 +1,41 @@
 {
     "name": "link-inspector",
-    "license": "AGPL-3.0-or-later",
     "version": "2.0.0",
+    "author": "Justin Dhillon",
+    "license": "AGPL-3.0-or-later",
+
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
     "bin": {
         "link-inspector": "dist/bin.js"
     },
+    "files": [
+        "!**/*"
+    ],
+
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/justindhillon/link-inspector.git"
+    },
+    "keywords": [
+        "link",
+        "hyperlink",
+        "typescript",
+        "developer-tools",
+        "cli"
+    ],
+    "bugs": {
+        "url": "https://github.com/justindhillon/link-inspector/issues"
+    },
+    "homepage": "https://github.com/justindhillon/link-inspector#readme",
+    
     "scripts": {
         "build": "tsup index.ts --format cjs,esm --dts --minify && tsup bin.ts --minify",
         "lint": "tsc",
         "test": "ts-node test/test.ts"
     },
     "devDependencies": {
-        "assert": "^2.1.0",
         "ts-node": "^10.9.2",
         "tsup": "^8.0.1",
         "typescript": "^5.3.3"
