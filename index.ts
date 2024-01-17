@@ -1,16 +1,17 @@
 import { checkLink } from "./checkLink";
 import fs from 'fs';
 
-let PROCESSES: string[] = [];
+let PROCESSES: string[][] = [[]];
 let CURRENTPROCESS = 0;
 let RUNNINGPROCESSES = 0;
 const MAXPROCESSES = 10;
 
-async function runProcess(callback: any, path: any) {
+async function runProcess(callback: any) {
     if (MAXPROCESSES <= RUNNINGPROCESSES || PROCESSES.length === CURRENTPROCESS) return;
 
     RUNNINGPROCESSES++;
-    const link = PROCESSES[CURRENTPROCESS]!;
+    const link = PROCESSES[CURRENTPROCESS]![0]!;
+    const path = PROCESSES[CURRENTPROCESS]![1]!;
     delete PROCESSES[CURRENTPROCESS];
     CURRENTPROCESS++;
     
@@ -21,14 +22,14 @@ async function runProcess(callback: any, path: any) {
     } catch {} // Skip invalid urls
 
     RUNNINGPROCESSES--;
-    runProcess(callback, path);
+    runProcess(callback);
 }
 
 export async function linkInspector(arg: string, callback: any, path='') {    
     try { // If arg is a link
         new URL(arg);
-        PROCESSES.push(arg);
-        runProcess(callback, path);
+        PROCESSES.push([arg, path]);
+        runProcess(callback);
         return;
     } catch {}
 
