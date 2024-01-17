@@ -10,10 +10,12 @@
     },
     "scripts": {
         "build": "tsup index.ts --format cjs,esm --dts --minify && tsup bin.ts --minify",
-        "lint": "tsc"
+        "lint": "tsc",
+        "test": "ts-node test/test.ts"
     },
     "devDependencies": {
         "@changesets/cli": "^2.27.1",
+        "ts-node": "^10.9.2",
         "tsup": "^8.0.1",
         "typescript": "^5.3.3"
     },

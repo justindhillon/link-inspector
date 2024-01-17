@@ -23,5 +23,5 @@ async function writeLink(link: string, path: any) {
 }
 
 for (const arg of args) {
-    linkInspector(arg, writeLink);
+    linkInspector(arg, writeLink, );
 }
