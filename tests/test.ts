@@ -14,16 +14,16 @@ const expectedLinks = [
 ]
 
 const expectedPaths = [
-    'test/tests/brokenLinks',
-    'test/tests/subfolder/brokenLinks',
-    'test/tests/brokenLinks',
-    'test/tests/subfolder/brokenLinks',
-    'test/tests/brokenLinks',
-    'test/tests/subfolder/brokenLinks',
-    'test/tests/brokenLinks',
-    'test/tests/subfolder/brokenLinks',
-    'test/tests/brokenLinks',
-    'test/tests/subfolder/brokenLinks'
+    'tests/links/brokenLinks',
+    'tests/links/subfolder/brokenLinks',
+    'tests/links/brokenLinks',
+    'tests/links/subfolder/brokenLinks',
+    'tests/links/brokenLinks',
+    'tests/links/subfolder/brokenLinks',
+    'tests/links/brokenLinks',
+    'tests/links/subfolder/brokenLinks',
+    'tests/links/brokenLinks',
+    'tests/links/subfolder/brokenLinks'
 ]
 
 function test() {
@@ -43,6 +43,6 @@ function addLinks(link: string, path: string) {
     brokenLinks.push([link, path]);
 }
 
-linkInspector("test/tests", addLinks);
+linkInspector("tests/links", addLinks);
 
 setTimeout(test, 10000);
