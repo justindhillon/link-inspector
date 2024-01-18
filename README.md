@@ -74,19 +74,19 @@ output/
    npm install
    ```
 
-3. Build the package
+3. Build the npm package
    
    ```
    npm run build
    ```
 
-4. Run the package
+4. Run the npm package
    
    ```
    npx link-inspector <file/directory path>
    ```
 
-5. Testing the npx package
+5. Testing the npm package
    
     ```
     npm run test
