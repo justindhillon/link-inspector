@@ -1,3 +1,4 @@
-/node_modules
-/output
-/input
+node_modules
+dist
+input
+output

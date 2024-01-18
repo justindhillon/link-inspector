@@ -1,41 +1,46 @@
 {
-  "name": "link-inspector",
-  "version": "1.5.1",
-  "description": "A npx package that automatically scans files and directories broken links.",
-  "bin": {
-    "link-inspector": "dist/index.js"
-  },
-  "files": [
-    "!**/*"
-  ],
-  "scripts": {
-    "build": "./node_modules/.bin/esbuild ./lib/index.js --format=esm --bundle --outfile=./dist/index.js --platform=node --target=node16.3 --minify",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/justindhillon/link-inspector.git"
-  },
-  "keywords": [
-    "link",
-    "hyperlink",
-    "checker",
-    "developer-tools",
-    "cli"
-  ],
-  "author": "Justin Dhillon",
-  "license": "AGPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/justindhillon/link-inspector/issues"
-  },
-  "homepage": "https://github.com/justindhillon/link-inspector#readme",
-  "devDependencies": {
-    "dir-compare": "^4.2.0",
-    "esbuild": "^0.19.9",
-    "jest": "^29.7.0"
-  },
-  "dependencies": {
-    "axios": "^1.6.5"
-  }
+    "name": "link-inspector",
+    "version": "2.0.0",
+    "author": "Justin Dhillon",
+    "license": "AGPL-3.0-or-later",
+
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "link-inspector": "dist/bin.js"
+    },
+    "files": [
+        "!**/*"
+    ],
+
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/justindhillon/link-inspector.git"
+    },
+    "keywords": [
+        "link",
+        "hyperlink",
+        "typescript",
+        "developer-tools",
+        "cli"
+    ],
+    "bugs": {
+        "url": "https://github.com/justindhillon/link-inspector/issues"
+    },
+    "homepage": "https://github.com/justindhillon/link-inspector#readme",
+    
+    "scripts": {
+        "build": "tsup index.ts --format cjs,esm --dts --minify && tsup bin.ts --minify",
+        "lint": "tsc",
+        "test": "ts-node test/test.ts"
+    },
+    "devDependencies": {
+        "ts-node": "^10.9.2",
+        "tsup": "^8.0.1",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "axios": "^1.6.5"
+    }
 }
