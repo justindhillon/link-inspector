@@ -33,7 +33,7 @@
     "scripts": {
         "build": "tsup index.ts --format cjs,esm --dts --minify && tsup bin.ts --minify",
         "lint": "tsc",
-        "test": "ts-node test/test.ts"
+        "test": "ts-node tests/test.ts"
     },
     "devDependencies": {
         "ts-node": "^10.9.2",
