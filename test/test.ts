@@ -1,4 +1,4 @@
-import { linkInspector } from "../index";
+import linkInspector from "../index";
 
 const expectedLinks = [
     'https://www.bbc.com/nonexistent-article-abcxyz',

@@ -25,7 +25,7 @@ async function runProcess(callback: any) {
     runProcess(callback);
 }
 
-export async function linkInspector(arg: string, callback: any, path='') {    
+export default async function linkInspector(arg: string, callback: any, path='') {    
     try { // If arg is a link
         new URL(arg);
         PROCESSES.push([arg, path]);

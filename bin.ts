@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { linkInspector } from "./index";
+import linkInspector from "./index";
 import {dirname, basename} from 'path';
 import fs from 'fs';
 
