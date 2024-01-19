@@ -58,10 +58,15 @@ export default async function linkInspector(arg: string, callback: any, path='')
         const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         const links: string[] = content.match(urlRegex) || [];
 
+        const directoryIndex = arg.indexOf(path);
+        const pathAfterDirectory = arg.substring(directoryIndex);
+
         for (const link of links) {
-            const directoryIndex = arg.indexOf(path);
-            const pathAfterDirectory = arg.substring(directoryIndex);
-            linkInspector(link, callback, pathAfterDirectory);
+            try { // Runs link inspector on each link
+                new URL(link);
+                PROCESSES.push([link, pathAfterDirectory]);
+                runProcess(callback);
+            } catch {}
         }
     } catch {
         console.error("Error: Not a valid link or path")
