@@ -30,6 +30,12 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      - name: Modify name of the package.json locally
+        uses: maxgfr/github-change-json@main
+        with:
+          key: 'name'
+          value: '@justindhillon/link-inspector'
+          path: ./package.json
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
