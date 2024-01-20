@@ -20,15 +20,13 @@ export async function checkLink(link: string): Promise<boolean> {
     try {
         await axios.head(link, params);
     } catch (err: any) {
-        // Forbidden still means alive
-        if (err.response.status === 403) return false;
-
         // If HEAD is not allowed try GET
-        if (err.response.status !== 405) return true;
-        try {
-            await axios.get(link, params);
-        } catch {
-            return true;
+        if (err.response.status === 405) {
+            try {
+                await axios.get(link, params);
+            } catch {
+                return true;
+            }
         }
     }
 
