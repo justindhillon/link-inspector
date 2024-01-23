@@ -1,4 +1,4 @@
-name: github-package
+name: github-publish
 
 on:
   release:
@@ -36,6 +36,7 @@ jobs:
           key: 'name'
           value: '@justindhillon/link-inspector'
           path: ./package.json
+      - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
