@@ -66,7 +66,7 @@ export default async function linkInspector(arg: string, callback: any, path='')
                 new URL(link);
                 PROCESSES.push([link, pathAfterDirectory]);
                 runProcess(callback);
-            } catch { return }
+            } catch {}
         }
     } catch {
         console.error("Error: Not a valid link or path")
