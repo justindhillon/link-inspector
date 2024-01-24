@@ -1,22 +1,21 @@
 import { checkLink } from "./checkLink";
 import fs from 'fs';
 
-let PROCESSES: string[][] = [[]];
+let PROCESSES: string[][] = [];
 let CURRENTPROCESS = 0;
 let RUNNINGPROCESSES = 0;
-const MAXPROCESSES = 10;
+const MAXPROCESSES = 100;
 
 async function runProcess(callback: any) {
     if (MAXPROCESSES <= RUNNINGPROCESSES || PROCESSES.length === CURRENTPROCESS) return;
 
     RUNNINGPROCESSES++;
-    const link = PROCESSES[CURRENTPROCESS]![0]!;
-    const path = PROCESSES[CURRENTPROCESS]![1]!;
+    const [link, path] = PROCESSES[CURRENTPROCESS]!;
     delete PROCESSES[CURRENTPROCESS];
     CURRENTPROCESS++;
     
     try {
-        if (await checkLink(link)) {
+        if (await checkLink(link!)) {
             callback(link, path);
         }
     } catch {} // Skip invalid urls
@@ -55,7 +54,7 @@ export default async function linkInspector(arg: string, callback: any, path='')
         if (!/^[\x00-\x7F]*$/.test(content)) return;
                 
         // Get all the links
-        const urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         const links: string[] = content.match(urlRegex) || [];
 
         const directoryIndex = arg.indexOf(path);
