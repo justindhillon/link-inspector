@@ -2,9 +2,9 @@ import { checkLink } from "./checkLink";
 import fs from 'fs';
 
 let PROCESSES: string[][] = [];
-let CURRENTPROCESS = 0;
-let RUNNINGPROCESSES = 0;
-const MAXPROCESSES = 100;
+let CURRENTPROCESS: number = 0;
+let RUNNINGPROCESSES: number = 0;
+const MAXPROCESSES: number = 100;
 
 async function runProcess(callback: any) {
     if (MAXPROCESSES <= RUNNINGPROCESSES || PROCESSES.length === CURRENTPROCESS) return;
@@ -24,7 +24,7 @@ async function runProcess(callback: any) {
     runProcess(callback);
 }
 
-export default async function linkInspector(arg: string, callback: any, path='') {    
+export default async function linkInspector(arg: string, callback: any, path: string = '') {    
     try { // If arg is a link
         new URL(arg);
         PROCESSES.push([arg, path]);
@@ -33,7 +33,7 @@ export default async function linkInspector(arg: string, callback: any, path='')
     } catch {}
 
     try { // If arg is a path
-        const stats = fs.statSync(arg);
+        const stats: fs.Stats = fs.statSync(arg);
 
         // Skip files over 100mb
         if (100*1024*1024 < stats.size) return
@@ -48,17 +48,17 @@ export default async function linkInspector(arg: string, callback: any, path='')
         }
 
         // Handle file
-        const content: any = fs.readFileSync(arg, 'utf8');
+        const content: string = fs.readFileSync(arg, 'utf8');
 
         // Skip binary files
         if (!/^[\x00-\x7F]*$/.test(content)) return;
                 
         // Get all the links
-        const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        const urlRegex: RegExp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         const links: string[] = content.match(urlRegex) || [];
 
-        const directoryIndex = arg.indexOf(path);
-        const pathAfterDirectory = arg.substring(directoryIndex);
+        const directoryIndex: number = arg.indexOf(path);
+        const pathAfterDirectory: string = arg.substring(directoryIndex);
 
         for (const link of links) {
             try { // Runs link inspector on each link
@@ -68,6 +68,6 @@ export default async function linkInspector(arg: string, callback: any, path='')
             } catch {}
         }
     } catch {
-        console.error("Error: Not a valid link or path")
+        console.error(`Error: ${arg} is not a valid link or path`);
     }
 }
