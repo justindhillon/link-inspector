@@ -4,13 +4,13 @@ import linkInspector from "./index";
 import {dirname, basename} from 'path';
 import fs from 'fs';
 
-const args = process.argv.slice(2);
+const args: string[] = process.argv.slice(2);
 
 if (args.length === 0) {
     console.error("no link or path given");
 }
 
-async function writeLink(link: string, path: any) {
+async function writeLink(link: string, path: string) {
     console.log("Broken Link:", link);
 
     if (path) {
@@ -23,7 +23,7 @@ async function writeLink(link: string, path: any) {
 }
 
 for (const arg of args) {
-    let path = '';
+    let path: string = '';
 
     try {new URL(arg)}
     catch {
