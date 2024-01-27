@@ -20,6 +20,9 @@ export async function checkLink(link: string): Promise<boolean> {
     try {
         await axios.head(link, params);
     } catch (err: any) {
+        // If blocking bots, return false
+        if (err.response.status === 999) return false;
+
         // If HEAD is not allowed try GET
         if (err.response.status === 405) {
             try {
