@@ -33,7 +33,10 @@ export default async function linkInspector(arg: string, callback: any, path: st
     } catch {}
 
     try { // If arg is a path
-        const stats: fs.Stats = fs.statSync(arg);
+        const stats: fs.Stats = fs.lstatSync(arg);
+
+        // Skip symbolic links
+        if (stats.isSymbolicLink()) return;
 
         // Skip files over 100mb
         if (100*1024*1024 < stats.size) return
