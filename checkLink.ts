@@ -23,14 +23,14 @@ export async function checkLink(link: string): Promise<boolean> {
         // If blocking bots, return false
         if (err.response.status === 999) return false;
 
-        // If method not allowed, return false
-        if (err.response.status === 405) return false;
-
         // If HEAD is not allowed try GET
         if (err.response.status === 405) {
             try {
                 await axios.get(link, params);
-            } catch {
+            } catch (error: any) {
+                // If method not allowed, return false
+                if (error.response.status === 405) return false;
+
                 return true;
             }
         }
