@@ -16,25 +16,28 @@ export async function checkLink(link: string): Promise<boolean> {
             "X-Amzn-Trace-Id": "Root=1-659f58c5-4de24ef7384486270161f185"
         }
     };
+    
+    const falsePositives: number[] = [999, 429, 403];  
 
     try {
         await axios.head(link, params);
     } catch (err: any) {
         // If false positive, return false
-        if (err.response.status === 999) return false;
-        if (err.response.status === 429) return false;
+        if (falsePositives.includes(err.response.status)) return false;
 
         // If HEAD is not allowed try GET
         if (err.response.status === 405) {
             try {
                 await axios.get(link, params);
             } catch (error: any) {
-                // If method not allowed, return false
-                if (error.response.status === 405) return false;
-
+                // If false positive, return false
+                if (falsePositives.includes(err.response.status)) return false;
+                
                 return true;
             }
         }
+        
+        return true;
     }
 
     return false;
