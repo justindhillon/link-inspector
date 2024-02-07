@@ -29,13 +29,11 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - name: Install jq
-        run: sudo apt-get install jq
-      - name: Run Bash script
-        run: |
+      - run: sudo apt-get install -y jq
+      - run: |
           chmod +x .github/workflows/github-publish.sh
           ./.github/workflows/github-publish.sh
+      - run: npm update
       - run: npm run build
       - run: npm publish
         env:
