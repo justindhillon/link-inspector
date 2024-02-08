@@ -17,13 +17,13 @@ export async function checkLink(link: string): Promise<boolean> {
         }
     };
     
-    const falsePositives: number[] = [999, 429, 403];  
+    const falsePositives: Set<number> = new Set([999, 429, 403, 401]);  
 
     try {
         await axios.head(link, params);
     } catch (err: any) {
         // If false positive, return false
-        if (falsePositives.includes(err.response.status)) return false;
+        if (falsePositives.has(err.response.status)) return false;
 
         // If HEAD is not allowed try GET
         if (err.response.status === 405) {
@@ -31,7 +31,7 @@ export async function checkLink(link: string): Promise<boolean> {
                 await axios.get(link, params);
             } catch (error: any) {
                 // If false positive, return false
-                if (falsePositives.includes(err.response.status)) return false;
+                if (falsePositives.has(err.response.status)) return false;
                 
                 return true;
             }
