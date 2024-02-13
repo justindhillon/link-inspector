@@ -57,7 +57,7 @@ export default async function linkInspector(arg: string, callback: any, path: st
         if (!/^[\x00-\x7F]*$/.test(content)) return;
                 
         // Get all the links
-        const urlRegex: RegExp = /(?<!xmlns=['"])((?<!xmlns:.*=['"])((?<!targetNamespace=['"])\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        const urlRegex: RegExp = /(?<!xmlns=['"])(?<!xmlns:.*=['"])(?<!targetNamespace=['"])(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         const links: string[] = content.match(urlRegex) || [];
 
         const directoryIndex: number = arg.indexOf(path);
