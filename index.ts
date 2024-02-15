@@ -1,17 +1,18 @@
 import { checkLink } from "./checkLink";
 import fs from 'fs';
 
-let PROCESSES: string[][] = [];
+let QUEUE:Record<number, string[]> = {};
+let PROCESS: number = 0;
 let CURRENTPROCESS: number = 0;
 let RUNNINGPROCESSES: number = 0;
 const MAXPROCESSES: number = 100;
 
 async function runProcess(callback: any) {
-    if (MAXPROCESSES <= RUNNINGPROCESSES || PROCESSES.length === CURRENTPROCESS) return;
+    if (MAXPROCESSES <= RUNNINGPROCESSES || !QUEUE[PROCESS-1]) return;
 
     RUNNINGPROCESSES++;
-    const [link, path] = PROCESSES[CURRENTPROCESS]!;
-    delete PROCESSES[CURRENTPROCESS];
+    const [link, path] = QUEUE[CURRENTPROCESS]!;
+    delete QUEUE[CURRENTPROCESS];
     CURRENTPROCESS++;
     
     try {
@@ -24,10 +25,11 @@ async function runProcess(callback: any) {
     runProcess(callback);
 }
 
-export default async function linkInspector(arg: string, callback: any, path: string = '') {    
+export default async function linkInspector(arg: string, callback: any, path: string = '') { 
     try { // If arg is a link
         new URL(arg);
-        PROCESSES.push([arg, path]);
+        QUEUE[PROCESS] = [arg, path];
+        PROCESS++;
         runProcess(callback);
         return;
     } catch {}
@@ -66,7 +68,8 @@ export default async function linkInspector(arg: string, callback: any, path: st
         for (const link of links) {
             try { // Runs link inspector on each link
                 new URL(link);
-                PROCESSES.push([link, pathAfterDirectory]);
+                QUEUE[PROCESS] = [link, pathAfterDirectory];
+                PROCESS++;
                 runProcess(callback);
             } catch {}
         }
