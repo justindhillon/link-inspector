@@ -18,7 +18,7 @@ The `arg` can be a link, file path, or directory path. The `callback` will be gi
 import linkInspector from 'link-inspector';
 
 linkInspector('http://example.com', function (link) {
-    console.log(`Broken link found: ${link}`);
+   console.log(`Broken link found: ${link}`);
 });
 ```
 
@@ -27,8 +27,8 @@ If you want to use linkInspector on all the files in a directory:
 ```js
 import linkInspector from 'link-inspector';
 
-linkInspector('./path/to/directory', function (link, path) {
-    console.log(`Broken link ${link} found in ${path}`);
+linkInspector('./path/to/directory', function (link, path, lineNumber) {
+   console.log(`Broken link ${link} found in ${path} on line ${lineNumber}`);
 });
 ```
 
