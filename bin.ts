@@ -10,14 +10,19 @@ if (args.length === 0) {
     console.error("no link or path given");
 }
 
-async function writeLink(link: string, path: string) {
+async function writeLink(link: string, path: string, lineNumber: number) {
+    path = path.replace(/\/\//g, '/');
+
     console.log("Broken Link:", link);
+    if (path) console.log("Path:", path);
+    if (lineNumber) console.log("Line:", lineNumber);
+    console.log("");
 
     if (path) {
         path = "output/" + path;
-        if (!fs.existsSync(path)) {
+        if (!fs.existsSync(path))
             fs.mkdirSync(dirname(path), { recursive: true });
-        }
+        
         fs.appendFileSync(path, link + "\n");
     }
 }
@@ -25,10 +30,11 @@ async function writeLink(link: string, path: string) {
 for (const arg of args) {
     let path: string = '';
 
-    try {new URL(arg)}
+    try { new URL(arg) }
     catch {
         path = basename(arg);
     }
 
     linkInspector(arg, writeLink, path);
+    console.log("");
 }
