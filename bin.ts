@@ -11,7 +11,11 @@ if (args.length === 0) {
 }
 
 async function writeLink(link: string, path: string) {
+    path = path.replace(/\/\//g, '/');
+    
     console.log("Broken Link:", link);
+    console.log("Path:", path);
+    console.log("");
 
     if (path) {
         path = "output/" + path;
