@@ -26,7 +26,7 @@ async function runProcess(callback: any) {
     runProcess(callback);
 }
 
-export default async function linkInspector(arg: string, callback: any, path: string) { 
+export default async function linkInspector(arg: string, callback: any, path: string = '') { 
     try { // If arg is a link
         new URL(arg);
         QUEUE[PROCESS] = [arg, path];
