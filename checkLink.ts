@@ -2,6 +2,13 @@ const axios = require("axios");
 
 // Return true if link is broken
 export async function checkLink(link: string): Promise<boolean> {
+    const ignoredCodes: Set<number> = new Set([999, 429, 403, 401]);  
+    const ignoredURLs: Set<string> = new Set(['example.com']);  
+
+    const url = new URL(link);
+    if (ignoredURLs.has(url.host))
+        return false;
+
     const params: object = {
         headers: {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8", 
@@ -17,13 +24,11 @@ export async function checkLink(link: string): Promise<boolean> {
         }
     };
     
-    const falsePositives: Set<number> = new Set([999, 429, 403, 401]);  
-
     try {
         await axios.head(link, params);
     } catch (err: any) {
         // If false positive, return false
-        if (falsePositives.has(err.response.status)) 
+        if (ignoredCodes.has(err.response.status)) 
             return false;
 
         // If HEAD is not allowed try GET
@@ -32,7 +37,7 @@ export async function checkLink(link: string): Promise<boolean> {
                 await axios.get(link, params);
             } catch (error: any) {
                 // If false positive, return false
-                if (falsePositives.has(err.response.status)) 
+                if (ignoredCodes.has(err.response.status)) 
                     return false;
                 
                 return true;
