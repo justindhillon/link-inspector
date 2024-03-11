@@ -3,6 +3,7 @@
     "version": "2.2.1",
     "author": "Justin Dhillon",
     "license": "AGPL-3.0-or-later",
+    "description": "NPM Tool That Audits Projects For Broken Links",
 
     "main": "dist/index.js",
     "module": "dist/index.mjs",
