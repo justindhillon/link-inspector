@@ -2,8 +2,22 @@ const axios = require("axios");
 
 // Return true if link is broken
 export async function checkLink(link: string): Promise<boolean> {
-  const ignoredCodes: Set<number> = new Set([999, 429, 403, 401]);
-  const ignoredURLs: Set<string> = new Set(['example.com']);
+  const ignoredCodes: Set<number> = new Set([
+    999, 
+    429, 
+    403, 
+    401
+  ]);
+  
+  const ignoredURLs: Set<string> = new Set([
+    'example.com',
+    'www.example.com',
+    'example.org',
+    'www.example.org',
+    'goo.gl',
+    'fonts.googleapis.com',
+    'fonts.gstatic.com'
+  ]);
 
   const url = new URL(link);
   if (ignoredURLs.has(url.host)) {
