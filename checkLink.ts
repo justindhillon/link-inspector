@@ -3,6 +3,7 @@ const axios = require("axios");
 const ignoredCodes: Set<number> = new Set([
   999, 
   429, 
+  421,
   405,
   403, 
   401
