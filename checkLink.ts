@@ -3,6 +3,7 @@ const axios = require("axios");
 const ignoredCodes: Set<number> = new Set([
   999, 
   429, 
+  405,
   403, 
   401
 ]);
@@ -39,21 +40,20 @@ export async function checkLink(link: string): Promise<boolean> {
     return false;
 
   try {
-    await axios.head(link, params);
+    await axios.get(link, params);
     return false;
   } catch (err: any) {
-    // Head request is not allowed, make get request
-    if (err.response.status === "405") {
-      try {
-        await axios.get(link, params);
-        return false;
-      } catch {}
-    }
-
     // If false positive, return false
     if (ignoredCodes.has(err.response.status))
       return false;
+
+    // Head request is not allowed, make get request
+    try {
+      await axios.get(link, params);
+      return false;
+    } catch {}
     
+    // All failed, return true
     return true;
   }
 }
