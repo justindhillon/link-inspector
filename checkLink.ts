@@ -40,7 +40,7 @@ export async function checkLink(link: string): Promise<boolean> {
     return false;
 
   try {
-    await axios.get(link, params);
+    await axios.head(link, params);
     return false;
   } catch (err: any) {
     // If false positive, return false
@@ -51,7 +51,10 @@ export async function checkLink(link: string): Promise<boolean> {
     try {
       await axios.get(link, params);
       return false;
-    } catch {}
+    } catch (err: any) {
+      if (ignoredCodes.has(err.response.status))
+        return false;
+    }
     
     // All failed, return true
     return true;
