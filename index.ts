@@ -1,7 +1,7 @@
 import { checkLink } from "./checkLink";
 import fs from 'fs';
 
-const urlRegex: RegExp = /(?<!xmlns=['"])(?<!xmlns:.*=['"])(?<!targetNamespace=['"])(\bhttps?:\/\/(?!.*\$)(?!.*{)(?!.*"\s\+)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+const urlRegex: RegExp = /(?<!xmlns=['"])(?<!xmlns:.*=['"])(?<!xsi=['"])(?<!xsi:.*=['"])(?<!targetNamespace=['"])(\bhttps?:\/\/(?!.*\$)(?!.*{)(?!.*"\s\+)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
 let QUEUE:Record<number, string[]> = {};
 let PROCESS: number = 0;
