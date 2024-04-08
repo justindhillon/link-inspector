@@ -39,13 +39,16 @@ export async function checkLink(link: string): Promise<boolean> {
   const url = new URL(link);
   if (ignoredURLs.has(url.host))
     return false;
+  if (url.host.indexOf("api.") !== -1)
+    return false
 
   try {
     await axios.head(link, params);
     return false;
   } catch (err: any) {
+    console.log(err.response);
     // If false positive, return false
-    if (ignoredCodes.has(err.response.status))
+    if (err.response?.status && ignoredCodes.has(err.response.status))
       return false;
 
     // Head request is not allowed, make get request
@@ -53,7 +56,7 @@ export async function checkLink(link: string): Promise<boolean> {
       await axios.get(link, params);
       return false;
     } catch (err: any) {
-      if (ignoredCodes.has(err.response.status))
+      if (err.response?.status && ignoredCodes.has(err.response.status))
         return false;
     }
     
