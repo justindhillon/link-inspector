@@ -46,7 +46,6 @@ export async function checkLink(link: string): Promise<boolean> {
     await axios.head(link, params);
     return false;
   } catch (err: any) {
-    console.log(err.response);
     // If false positive, return false
     if (err.response?.status && ignoredCodes.has(err.response.status))
       return false;
