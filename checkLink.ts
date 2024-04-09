@@ -10,6 +10,8 @@ const ignoredCodes: Set<number> = new Set([
 ]);
 
 const ignoredURLs: Set<string> = new Set([
+  'localhost',
+  '127.0.0.1',
   'example.com',
   'www.example.com',
   'example.org',
