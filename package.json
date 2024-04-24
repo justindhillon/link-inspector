@@ -1,6 +1,6 @@
 {
     "name": "link-inspector",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "author": "Justin Dhillon",
     "license": "AGPL-3.0-or-later",
     "description": "NPM Tool That Audits Projects For Broken Links",
