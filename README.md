@@ -2,7 +2,7 @@
 [![Total Downloads](https://img.shields.io/npm/dt/link-inspector)](https://www.npmjs.com/package/link-inspector)
 
 <div align="center">
-<img height="150px" src="https://github.com/justindhillon/link-inspector/assets/145078271/532b05a6-dd98-48f3-aad1-f469c093752a">
+<img height="150px" src="https://raw.githubusercontent.com/justindhillon/link-inspector/test/tests/test-folder/logo.png">
 
 <h1>link-inspector</h1>
 <h3>Automatically scan links, files, and directories for broken links.</h3>
